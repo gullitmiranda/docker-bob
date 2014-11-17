@@ -1,4 +1,2 @@
-docker-bob
-==========
-
-Application bob php
+docker-lamp
+===========
