@@ -6,7 +6,7 @@
 
 # Pull base image.
 FROM dockerfile/ubuntu
-MAINTAINER Odlanier Mendes <dlanileonardo@gmail.com>
+MAINTAINER Luis Baroni <luis.baroni@lbenterprise.info>
 
 ENV SHELL /bin/bash
 
