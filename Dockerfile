@@ -29,7 +29,7 @@ RUN apt-get -yq install openjdk-7-jdk
 RUN apt-get -yq install ant
 
 # Install Pear packages
-RUN pear channel-discover pear.dafitidev.com.br
+# RUN pear channel-discover pear.dafitidev.com.br
 RUN pear channel-discover zend.googlecode.com/svn
 RUN pear channel-discover pear.doctrine-project.org
 RUN pear channel-discover pear.phing.info
@@ -40,8 +40,8 @@ RUN pear channel-discover pear.phpmd.org
 RUN pear channel-discover pear.symfony.com
 RUN pear channel-discover pear.netpirates.net
 
-RUN pear install -o DPEAR/Monolog
-RUN pear install -o DPEAR/DPEAR
+# RUN pear install -o DPEAR/Monolog
+# RUN pear install -o DPEAR/DPEAR
 RUN pear install -o zend/zend-1.12.7
 RUN pear install -o doctrine/DoctrineORM-2.3.3
 RUN pear install -o phing/phing
