@@ -1,16 +1,7 @@
-#
-# Apache PHP Dockerfile
-#
-# https://github.com/dockerfile/mongodb
-#
-
-# Pull base image.
-FROM dockerfile/ubuntu
+FROM ubuntu:trusty
 MAINTAINER Luis Baroni <luis.baroni@lbenterprise.info>
 
-ENV SHELL /bin/bash
-
-# Install packages
+# Install base packages
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 RUN apt-get -yq install curl
@@ -57,14 +48,36 @@ RUN pear install -o phpmd/PHP_PMD
 RUN pear install -o pear/PHP_CodeSniffer 
 RUN pear install -o pear/PhpDocumentor
 
-# Remove pre-installed database
-RUN rm -rf /var/lib/mysql/*
+RUN rm -rf /var/lib/apt/lists/*
+RUN sed -i "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/apache2/php.ini
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# config to enable .htaccess
-ADD apache_default /etc/apache2/sites-available/000-default.conf
-ADD ports.conf /etc/apache2/ports.conf
-ADD php.ini /etc/php5/apache2/php.ini
+# Enable apache mods.
+RUN a2enmod php5
 RUN a2enmod rewrite
 
-# EXPOSE 80
-# CMD ["/run.sh"]
+# Add image configuration and scripts
+ADD run.sh /run.sh
+RUN chmod 755 /run.sh
+
+# Configure /logs directory
+VOLUME /logs
+ENV APACHE_LOG_DIR /logs
+
+# Configure /app folder with sample app
+VOLUME /app
+RUN rm -fr /var/www/html && ln -s /app /var/www/html
+RUN chown www-data:www-data /app -R
+
+# Configure php.ini
+ADD php.ini /etc/php5/apache2/php.ini
+ADD php.ini /etc/php5/cli/php.ini
+
+# Configure sites available confs
+ADD sites-available /sites-available
+WORKDIR /sites-available
+RUN for FILE in *; do cp ${FILE} /etc/apache2/sites-available/${FILE} && a2ensite ${FILE}; done;
+
+EXPOSE 80
+WORKDIR /app
+CMD ["/run.sh"]
