@@ -79,5 +79,5 @@ WORKDIR /sites-available
 RUN for FILE in *; do cp ${FILE} /etc/apache2/sites-available/${FILE} && a2ensite ${FILE}; done;
 
 # EXPOSE 80
-WORKDIR /app
+# WORKDIR /app
 # CMD ["/run.sh"]
