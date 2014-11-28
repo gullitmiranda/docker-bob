@@ -57,8 +57,8 @@ RUN a2enmod php5
 RUN a2enmod rewrite
 
 # Add image configuration and scripts
-ADD run.sh /run.sh
-RUN chmod 755 /run.sh
+# ADD run.sh /run.sh
+# RUN chmod 755 /run.sh
 
 # Configure /logs directory
 VOLUME /logs
