@@ -78,6 +78,6 @@ ADD sites-available /sites-available
 WORKDIR /sites-available
 RUN for FILE in *; do cp ${FILE} /etc/apache2/sites-available/${FILE} && a2ensite ${FILE}; done;
 
-EXPOSE 80
+# EXPOSE 80
 WORKDIR /app
-CMD ["/run.sh"]
+# CMD ["/run.sh"]
