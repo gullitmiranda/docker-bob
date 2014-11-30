@@ -1,6 +1,8 @@
 FROM ubuntu:trusty
 MAINTAINER Luis Baroni <luis.baroni@lbenterprise.info>
 
+ENV SHELL /bin/bash
+
 # Install base packages
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
