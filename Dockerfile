@@ -22,9 +22,14 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install php5-curl
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install php-soap
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install vim
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install nano
+RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install php5-pear
 RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install php5-memcache
 RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install php5-imagick
-RUN DEBIAN_FRONTEND=noninteractive php5enmod curl apcu gd json mcrypt mysql mysqli opcache pdo pdo_mysql readline imagick memcache
+RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install php5-dev
+RUN DEBIAN_FRONTEND=noninteractive php5enmod curl apcu gd json mcrypt mysql mysqli opcache pdo pdo_mysql readline imagick memcache pear dev
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install openjdk-7-jdk
+RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install ant
 
 # Remove pre-installed database
 RUN rm -rf /var/lib/mysql/*
