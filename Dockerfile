@@ -22,7 +22,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install php5-curl
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install php-soap
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install vim
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install nano
-# RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install php5-pear
 RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install php5-memcache
 RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install php5-imagick
 RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install php5-dev
@@ -30,6 +29,35 @@ RUN DEBIAN_FRONTEND=noninteractive php5enmod curl apcu gd json mcrypt mysql mysq
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install openjdk-7-jdk
 RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install ant
+
+# Install Pear packages
+# RUN pear channel-discover pear.dafitidev.com.br
+RUN pear channel-discover zend.googlecode.com/svn
+RUN pear channel-discover pear.doctrine-project.org
+RUN pear channel-discover pear.phing.info
+RUN pear channel-discover pear.phpunit.de
+RUN pear channel-discover components.ez.no
+RUN pear channel-discover pear.pdepend.org
+RUN pear channel-discover pear.phpmd.org
+RUN pear channel-discover pear.symfony.com
+RUN pear channel-discover pear.netpirates.net
+
+# RUN pear install -o DPEAR/Monolog
+# RUN pear install -o DPEAR/DPEAR
+RUN pear install -o zend/zend-1.12.7
+RUN pear install -o doctrine/DoctrineORM-2.3.3
+RUN pear install -o phing/phing
+RUN pear install -o pear.phpunit.de/PHPUnit-3.7.28
+RUN pear install -o pear.phpunit.de/DbUnit
+RUN pear install -o phpunit/PHPUnit_Story
+RUN pear install -o phpunit/PHPUnit_Selenium
+RUN pear install -o phpunit/phpcpd
+RUN pear install -o phpunit/phploc
+RUN pear install -o phpunit/PHP_Invoker 
+RUN pear install -o pdepend/PHP_Depend-beta 
+RUN pear install -o phpmd/PHP_PMD 
+RUN pear install -o pear/PHP_CodeSniffer 
+RUN pear install -o pear/PhpDocumentor
 
 # Remove pre-installed database
 RUN rm -rf /var/lib/mysql/*
