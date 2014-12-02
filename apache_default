@@ -3,7 +3,7 @@ ServerName localhost
 <VirtualHost *:8080>
         ServerAdmin webmaster@localhost
 
-        DocumentRoot /app/bob
+        DocumentRoot /app/bob/public
         <Directory />
                 Options FollowSymLinks
                 AllowOverride None
